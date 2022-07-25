@@ -39,7 +39,7 @@ void datosJugador(int x, int num){
 	}
 }
 
-
+// tiene que ir ganancias y perdidas como variable acumuladora .... 'x=x+1'
 
 
 
