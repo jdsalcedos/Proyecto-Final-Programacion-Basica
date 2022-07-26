@@ -11,7 +11,7 @@
 using namespace std;
 
 struct perfil{
-	char edad;
+	char edad;                //"numero = atoi(texto);"
 	char nombre[cantMaxNombre];
 	char apellido[cantMaxNombre];
 	char ciudad[cantMaxNombre];
