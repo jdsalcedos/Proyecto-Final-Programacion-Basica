@@ -3,7 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <locale.h>
-#include <cstdlib.h>
+#include <cstdlib>
 
 #define cantMaxNombre 50
 #define cantMaxJugadores 50
