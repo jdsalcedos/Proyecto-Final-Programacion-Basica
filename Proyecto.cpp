@@ -10,23 +10,20 @@
 using namespace std;
 
 struct perfil{
-	int edad;
+	char edad;
 	char nombre[cantMaxNombre];
 	char apellido[cantMaxNombre];
 	char ciudad[cantMaxNombre];
-	float dinero;
-};
-
-struct perfil lista[cantMaxJugadores];
-
+	char dinero;
+} lista[cantMaxJugadores];
 
 void registroJugadores(int n){
 	for (int i=0;i<n;i++){
 		cout<<"Digite su nombre"<<endl; cin.getline(lista[i].nombre,cantMaxNombre, '\n');
 		cout<<"Digite su apellido"<<endl; cin.getline(lista[i].apellido,cantMaxNombre, '\n');
 		cout<<"Digite su ciudad"<<endl; cin.getline(lista[i].ciudad,cantMaxNombre, '\n');
-	    cout<<"Digite su edad"<<endl; cin>>lista[i].edad;
-	    cout<<"Ingrese la cantidad de dinero a jugar"<<endl; cin>>lista[i].dinero;
+	  cout<<"Digite su edad"<<endl; cin.getline(lista[i].edad);
+	  cout<<"Ingrese la cantidad de dinero a jugar"<<endl; cin.getline(lista[i].dinero);
 	}
 }
 
@@ -46,12 +43,12 @@ void datosJugador(int x, int num){
 
 
 void menu(){
-	cout<<"\n\t\tOPCIONES PARA JUGADORES\n\n";
+  cout<<"\n\t\tOPCIONES PARA JUGADORES\n\n";
 	cout<<"1. Registrar jugadores"<<endl;
-	cout<<"2. Mostrar datos del jugador"<<endl;
-	cout<<"3. Mostrar dinero del jugador"<<endl;
-	cout<<"4. Eliminar jugador"<<endl;
-	cout<<"5. Jugar"<<endl;
+	cout<<"2. Jugar"<<endl;
+	cout<<"3. Eliminar jugador"<<endl;
+	cout<<"4. Mostrar datos del jugador"<<endl;
+	cout<<"5. Mostrar dinero del jugador"<<endl;
 	cout<<"6. Salir"<<endl;
 
 	cout<<"\nIngrese una opción: ";
@@ -66,7 +63,7 @@ int main(){
   setlocale("LC_ALL,spanish");
 	int ed,num,opcion;
     do{
-	cout<<"Digite su edad para permitir su acceso"<<endl; cin>>ed;
+			cout<<"Digite su edad para permitir su acceso"<<endl; cin>>ed;
     if (ed >= 18){
     	if (lista[num].dinero >= 1000){
 
@@ -74,12 +71,12 @@ int main(){
 
 
 
+			}else{
+				cout<<"No puede jugar con esa cantidad de dinero, se requiere minimo un ingreso de $1000"<<endl;
+				break;
+			}
 		}else{
-			cout<<"No puede jugar con esa cantidad de dinero, se requiere minimo un ingreso de $1000"<<endl;
-			break;
+			cout<<"No cumple con la edad minima requerida!!"<<endl;
 		}
-	}else{
-		cout<<"No cumple con la edad minima requerida!!"<<endl;
-	}
 	}while(opcion==true);
 }
