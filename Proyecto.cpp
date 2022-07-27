@@ -23,8 +23,8 @@ void registroJugadores(int n){
 		cout<<"Digite su nombre"<<endl; cin.getline(lista[i].nombre,cantMaxNombre, '\n');
 		cout<<"Digite su apellido"<<endl; cin.getline(lista[i].apellido,cantMaxNombre, '\n');
 		cout<<"Digite su ciudad"<<endl; cin.getline(lista[i].ciudad,cantMaxNombre, '\n');
-	  cout<<"Digite su edad"<<endl; cin.getline(lista[i].edad);
-	  cout<<"Ingrese la cantidad de dinero a jugar"<<endl; cin.getline(lista[i].dinero);
+	  	cout<<"Digite su edad"<<endl; cin.getline(lista[i].edad);
+	  	cout<<"Ingrese la cantidad de dinero a jugar"<<endl; cin.getline(lista[i].dinero);
 	}
 }
 
@@ -64,20 +64,20 @@ int main(){
   setlocale("LC_ALL,spanish");
 	int ed,num,opcion;
     do{
-			cout<<"Digite su edad para permitir su acceso"<<endl; cin>>ed;
-    if (ed >= 18){
-    	if (lista[num].dinero >= 1000){
+	cout<<"Digite su edad para permitir su acceso"<<endl; cin>>ed;
+    	if (ed >= 18){
+    		if (lista[num].dinero >= 1000){
 
 
 
 
 
-			}else{
-				cout<<"No puede jugar con esa cantidad de dinero, se requiere minimo un ingreso de $1000"<<endl;
-				break;
-			}
 		}else{
-			cout<<"No cumple con la edad minima requerida!!"<<endl;
+			cout<<"No puede jugar con esa cantidad de dinero, se requiere minimo un ingreso de $1000"<<endl;
+			break;
 		}
+	}else{
+		cout<<"No cumple con la edad minima requerida!!"<<endl;
+	}
 	}while(opcion==true);
 }
