@@ -41,7 +41,7 @@ void datosJugador(int x, int num){
 }
 
 //Funcion de Resultados de los juegos
-int dado(int numero){            //numero = lo que el usuario ingresa para apostar
+bool dado(int numero){            //numero = lo que el usuario ingresa para apostar
 	bool resultadoDado;
 	numeroGanador= 1 + rand() %6;							//numero aleatorio entre 1 y 6
 	cout<<"El numero ganador es "<<numeroGanador<<endl;
@@ -53,7 +53,7 @@ int dado(int numero){            //numero = lo que el usuario ingresa para apost
 		cout<<"Lamentablemente perdiste"<<endl;
 	}
 }
-int moneda(int numero){
+bool moneda(int numero){
 	string nombre = "";			//numero = lo que el usuario ingresa para apostar
 	bool resultadoMoneda;
 	numeroGanador= 1 + rand() %2;
@@ -83,7 +83,7 @@ float dineroJugador(lista[i].dinero,int opcionJuego){
 		}else{
 			perdidas+=350;
 			lista[x].dinero -= perdidas
-		}	
+		}
 	}else if(opcionJuego == 2){
 		if (resultadoMoneda == true){
 			ganacias+=100;
@@ -96,10 +96,10 @@ float dineroJugador(lista[i].dinero,int opcionJuego){
 }
 
 void eliminarJugador(){  // funcion para eliminar jugador 'ejemplo eliminar_vendedor'
-	
-	
-	
-	
+
+
+
+
 }
 
 
@@ -121,7 +121,7 @@ void menu(){
 int main(){
   setlocale("LC_ALL,spanish");
 	int ed,num,opcion,opcionJuego;
-	
+
     do{
     	fflush(stdin);
 		cout<<"Digite su edad para permitir su acceso"<<endl; cin>>ed;
