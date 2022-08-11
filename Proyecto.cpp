@@ -16,6 +16,18 @@ struct perfil{
 	float dinero;
 } lista[cantMaxJugadores];
 
+// funcion para eliminar jugador
+void eliminarJugador(int x, int &num){
+	if(num>0){
+		for(int i=x;i<num-1;i++)
+			lista[i]=lista[i+1];
+		num--;
+	}
+	else{
+		cout<<"\n\tRegistro vacio..!";
+	}
+}
+
 //Registro de jugadores
 void registroJugadores(int n){
 	for (int i=0;i<n;i++){
@@ -25,6 +37,10 @@ void registroJugadores(int n){
 		cout<<"Digite su ciudad: "<<endl; cin.getline(lista[i].ciudad,cantMaxNombre, '\n');
   	cout<<"Digite su edad: "<<endl; cin>>(lista[i].edad);
   	cout<<"Ingrese la cantidad de dinero a jugar: "<<endl; cin>>(lista[i].dinero);
+		if (lista[i].dinero < 1000){
+			cout<<"No puede jugar el jugador que esta registrando por no cumplir con la cantidad minima de dinero"<<endl;
+			eliminarJugador(i);
+		}
 	}
 }
 
@@ -72,7 +88,7 @@ bool moneda(int numero){
 }
 
 // funcion valor apuestas
-float dineroJugador(lista[i].dinero,int opcionJuego){
+float dineroJugador(float lista[i].dinero,int opcionJuego){
 	float ganancias=0, perdidas=0;
 	cout<<"\tDinero Inicial: $"<<lista[x].dinero<<endl;
 	if (opcionJuego == 1){					//juego es dado
@@ -94,18 +110,7 @@ float dineroJugador(lista[i].dinero,int opcionJuego){
 	cout<<"Su dinero actual es: $"<<lista[x].dinero;
 }
 
-void eliminarJugador(int x, int &num){  // funcion para eliminar jugador
-	if(num>0){
-		for(int i=x;i<num-1;i++)
-			lista[i]=lista[i+1];
-		num--;
-	}
-	else{
-		cout<<"\n\tRegistro vacio..!";
-	}
 
-
-}
 
 
 void menu(){
@@ -125,22 +130,48 @@ void menu(){
 
 int main(){
   setlocale("LC_ALL,spanish");
-	int ed,num,opcion,opcionJuego;
+	int ed,num,numero,numeroGanador,opcion,opcionJuego,num_jugador;
 
     do{
     	fflush(stdin);
-		cout<<"Digite su edad para permitir su acceso"<<endl; cin>>ed;
+			cout<<"Digite su edad para permitir su acceso"<<endl; cin>>ed;
     	if (ed >= 18){
-    		if (lista[num].dinero >= 1000){
+				menu(); cin>>opcion;
+				switch (opcion){
+					case 1:
+						cout<<"\n Numero de jugadores: ";
+            cin>> num;
+						registroJugadores(num);
+						break;
+					case 2:
+					  cout<<"\n Ingrese numero de jugador: ";
+					  cin>> num_jugador;
+						cout<<"\tQue desea jugar \n1. Dados\n2. Moneda"<<endl; cin>>opcionJuego;
+						if(opcionJuego==1){
+							cout<<"Digite el numero al que desea apostar (1 a 6)"<<endl; cin>>numero;
+							dado(numero);
+							dineroJugador(num_jugador-1,opcionJuego);
+						}else if(opcionJuego == 2){
+							cout<<"Digite el numero al que desea apostar (1. cara   2. sello)"<<endl; cin>>numero;
+							moneda(numero);
+							dineroJugador(num_jugador-1,opcionJuego);
+						}
+						break;
+					case 3:
+						cout<<"\n Ingrese numero de jugador que desea eliminar: ";
+						cin>> num_jugador;
+						eliminarJugador(num_jugador-1,num);
+					  break;
+					case 4:
+						cout<<"\n Ingrese numero de jugador que desea ver: ";
+						cin>> num_jugador;
+						datosJugador(num_jugador-1,num);
+					case 5:
+						cout<<"\n Ingrese numero de jugador que desea ver: ";
+						cin>> num_jugador;
+						cout<<"Dinero actual del jugador: "<<lista[num_jugador-1].dinero<<endl;
+				}
 
-
-
-
-
-			}else{
-				cout<<"No puede jugar con esa cantidad de dinero, se requiere minimo un ingreso de $1000"<<endl;
-				break;
-			}
 		}else{
 			cout<<"No cumple con la edad minima requerida!!"<<endl;
 		}
