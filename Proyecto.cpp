@@ -1,6 +1,4 @@
 #include <iostream>
-#include <string.h>
-#include <math.h>
 #include <stdlib.h>
 #include <locale.h>
 #include <cstdlib>
@@ -22,13 +20,14 @@ struct perfil{
 void registroJugadores(int n){
 	for (int i=0;i<n;i++){
 		fflush(stdin);
-		cout<<"Digite su nombre"<<endl; cin.getline(lista[i].nombre,cantMaxNombre, '\n');
-		cout<<"Digite su apellido"<<endl; cin.getline(lista[i].apellido,cantMaxNombre, '\n');
-		cout<<"Digite su ciudad"<<endl; cin.getline(lista[i].ciudad,cantMaxNombre, '\n');
-	  	cout<<"Digite su edad"<<endl; cin>>(lista[i].edad);
-	  	cout<<"Ingrese la cantidad de dinero a jugar"<<endl; cin>>(lista[i].dinero);
+		cout<<"Digite su nombre: "<<endl; cin.getline(lista[i].nombre,cantMaxNombre, '\n');
+		cout<<"Digite su apellido: "<<endl; cin.getline(lista[i].apellido,cantMaxNombre, '\n');
+		cout<<"Digite su ciudad: "<<endl; cin.getline(lista[i].ciudad,cantMaxNombre, '\n');
+  	cout<<"Digite su edad: "<<endl; cin>>(lista[i].edad);
+  	cout<<"Ingrese la cantidad de dinero a jugar: "<<endl; cin>>(lista[i].dinero);
 	}
 }
+
 //Muestra los datos del jugador
 void datosJugador(int x, int num){
 	if (num>0){
@@ -67,7 +66,7 @@ bool moneda(int numero){
 		resultadoMoneda = true;
 		cout<<"FELICIDADES GANO!!!"<<endl;
 	}else{
-		resultadoMonea = false;
+		resultadoMoneda = false;
 		cout<<"Lamentablemente perdiste"<<endl;
 	}
 }
@@ -95,9 +94,15 @@ float dineroJugador(lista[i].dinero,int opcionJuego){
 	cout<<"Su dinero actual es: $"<<lista[x].dinero;
 }
 
-void eliminarJugador(){  // funcion para eliminar jugador 'ejemplo eliminar_vendedor'
-
-
+void eliminarJugador(int x, int &num){  // funcion para eliminar jugador
+	if(num>0){
+		for(int i=x;i<num-1;i++)
+			lista[i]=lista[i+1];
+		num--;
+	}
+	else{
+		cout<<"\n\tRegistro vacio..!";
+	}
 
 
 }
@@ -105,7 +110,7 @@ void eliminarJugador(){  // funcion para eliminar jugador 'ejemplo eliminar_vend
 
 void menu(){
 	fflush(stdin);
-  	cout<<"\n\t\tOPCIONES PARA JUGADORES\n\n";
+	cout<<"\n\t\tOPCIONES PARA JUGADORES\n\n";
 	cout<<"1. Registrar jugadores"<<endl;
 	cout<<"2. Jugar"<<endl;
 	cout<<"3. Eliminar jugador"<<endl;
