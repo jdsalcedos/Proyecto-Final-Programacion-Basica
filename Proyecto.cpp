@@ -72,9 +72,9 @@ int numeroGanador=0,num_jugador;            //numero = lo que el usuario ingresa
 		cout<<"Lamentablemente perdiste"<<endl;
 	}
 }
-void moneda(int x, int numero){
+void moneda(int num_jugador, int numero){
 	string nombre = "";	
-	int numeroGanador=0,num_jugador;		//numero = lo que el usuario ingresa para apostar
+	int numeroGanador=0;		//numero = lo que el usuario ingresa para apostar
 	numeroGanador= 1 + rand() %2;
 	if (numeroGanador == 1){
 		nombre="Cara";
@@ -88,7 +88,7 @@ void moneda(int x, int numero){
 		cout<<"FELICIDADES GANO!!!"<<endl;
 	}else{
 		lista[num_jugador-1].dinero -= 150;
-		lista[num_jugador-1].perdidas +=150;
+		lista[num_jugador-1].perdidas += 150;
 		cout<<"Lamentablemente perdiste"<<endl;
 	}
 }
@@ -131,10 +131,10 @@ int main(){
 						cout<<"\tQue desea jugar \n1. Dados\n2. Moneda"<<endl; cin>>opcionJuego;
 						if(opcionJuego==1){
 							cout<<"Digite el numero al que desea apostar (1 a 6)"<<endl; cin>>numero;
-							dado(x,numero);
+							dado(num_jugador,numero);
 						}else if(opcionJuego == 2){
 							cout<<"Digite el numero al que desea apostar (1. cara   2. sello)"<<endl; cin>>numero;
-							moneda(x,numero);
+							moneda(num_jugador,numero);
 						}
 						}else{
 							cout<<"Registro vacio!!"<<endl;
@@ -143,9 +143,9 @@ int main(){
 						break;
 				case 3:
 					if(num>0){
-					cout<<"\n Ingrese numero de jugador que desea eliminar: ";
-					cin>> num_jugador;
-					eliminarJugador(num_jugador-1,num);
+						cout<<"\n Ingrese numero de jugador que desea eliminar: ";
+						cin>> num_jugador;
+						eliminarJugador(num_jugador-1,num);
 					}else{
 						cout<<"Registro vacio!!"<<endl;
 						goto registro;
