@@ -13,7 +13,9 @@ struct perfil{
 	char nombre[cantMaxNombre];
 	char apellido[cantMaxNombre];
 	char ciudad[cantMaxNombre];
-	float dinero;
+	float dinero; 
+	float ganancias;
+	float perdidas;
 } lista[cantMaxJugadores];
 
 // funcion para eliminar jugador
@@ -29,17 +31,17 @@ void eliminarJugador(int x, int &num){
 }
 
 //Registro de jugadores
-void registroJugadores(int n){
-	for (int i=0;i<n;i++){
+void registroJugadores(int x, int num){
+	for (int i=0;i<num;i++){
 		fflush(stdin);
 		cout<<"Digite su nombre: "<<endl; cin.getline(lista[i].nombre,cantMaxNombre, '\n');
 		cout<<"Digite su apellido: "<<endl; cin.getline(lista[i].apellido,cantMaxNombre, '\n');
 		cout<<"Digite su ciudad: "<<endl; cin.getline(lista[i].ciudad,cantMaxNombre, '\n');
-  	cout<<"Digite su edad: "<<endl; cin>>(lista[i].edad);
-  	cout<<"Ingrese la cantidad de dinero a jugar: "<<endl; cin>>(lista[i].dinero);
+	  	cout<<"Digite su edad: "<<endl; cin>>(lista[i].edad);
+	  	cout<<"Ingrese la cantidad de dinero a jugar: "<<endl; cin>>(lista[i].dinero);
 		if (lista[i].dinero < 1000){
 			cout<<"No puede jugar el jugador que esta registrando por no cumplir con la cantidad minima de dinero"<<endl;
-			eliminarJugador(i);
+			eliminarJugador(x,num);
 		}
 	}
 }
@@ -56,21 +58,23 @@ void datosJugador(int x, int num){
 }
 
 //Funcion de Resultados de los juegos
-bool dado(int numero){            //numero = lo que el usuario ingresa para apostar
-	bool resultadoDado;
+void dado(int x, int numero){
+int numeroGanador=0,num_jugador;            //numero = lo que el usuario ingresa para apostar
 	numeroGanador= 1 + rand() %6;							//numero aleatorio entre 1 y 6
 	cout<<"El numero ganador es "<<numeroGanador<<endl;
 	if (numero==numeroGanador){
-		resultadoDado = true;
+		lista[num_jugador-1].dinero += 500;
+		lista[num_jugador-1].ganancias += 500;
 		cout<<"FELICIDADES GANO!!!"<<endl;
 	}else{
-		resultadoDado = false;
+		lista[num_jugador-1].dinero -= 350;
+		lista[num_jugador-1].perdidas += 350;
 		cout<<"Lamentablemente perdiste"<<endl;
 	}
 }
-bool moneda(int numero){
-	string nombre = "";			//numero = lo que el usuario ingresa para apostar
-	bool resultadoMoneda;
+void moneda(int x, int numero){
+	string nombre = "";	
+	int numeroGanador=0,num_jugador;		//numero = lo que el usuario ingresa para apostar
 	numeroGanador= 1 + rand() %2;
 	if (numeroGanador == 1){
 		nombre="Cara";
@@ -79,39 +83,15 @@ bool moneda(int numero){
 	}
 	cout<<"El lado ganador es "<<nombre<<endl;
 	if (numero == numeroGanador){
-		resultadoMoneda = true;
+		lista[num_jugador-1].dinero += 100;
+		lista[num_jugador-1].ganancias +=100;
 		cout<<"FELICIDADES GANO!!!"<<endl;
 	}else{
-		resultadoMoneda = false;
+		lista[num_jugador-1].dinero -= 150;
+		lista[num_jugador-1].perdidas +=150;
 		cout<<"Lamentablemente perdiste"<<endl;
 	}
 }
-
-// funcion valor apuestas
-float dineroJugador(float lista[i].dinero,int opcionJuego){
-	float ganancias=0, perdidas=0;
-	cout<<"\tDinero Inicial: $"<<lista[x].dinero<<endl;
-	if (opcionJuego == 1){					//juego es dado
-		if (resultadoDado == true){
-			ganacias+=500;
-			lista[x].dinero += ganancias;
-		}else{
-			perdidas+=350;
-			lista[x].dinero -= perdidas
-		}
-	}else if(opcionJuego == 2){
-		if (resultadoMoneda == true){
-			ganacias+=100;
-			lista[x].dinero += ganancias;
-		}else{
-			perdidas+=150;
-			lista[x].dinero -= perdidas;
-	}
-	cout<<"Su dinero actual es: $"<<lista[x].dinero;
-}
-
-
-
 
 void menu(){
 	fflush(stdin);
@@ -123,57 +103,80 @@ void menu(){
 	cout<<"5. Mostrar dinero del jugador"<<endl;
 	cout<<"6. Salir"<<endl;
 
-	cout<<"\nIngrese una opciÃ³n: ";
+	cout<<"\nIngrese una opción: ";
 }
 
 
 
 int main(){
-  setlocale("LC_ALL,spanish");
-	int ed,num,numero,numeroGanador,opcion,opcionJuego,num_jugador;
+  setlocale(LC_ALL,"spanish");
+	int ed,num,numero,numeroGanador,opcion,opcionJuego,num_jugador,x;
 
-    do{
-    	fflush(stdin);
-			cout<<"Digite su edad para permitir su acceso"<<endl; cin>>ed;
-    	if (ed >= 18){
-				menu(); cin>>opcion;
-				switch (opcion){
-					case 1:
-						cout<<"\n Numero de jugadores: ";
-            cin>> num;
-						registroJugadores(num);
-						break;
-					case 2:
-					  cout<<"\n Ingrese numero de jugador: ";
-					  cin>> num_jugador;
+	fflush(stdin);
+	cout<<"Digite su edad para permitir su acceso"<<endl; cin>>ed;
+	if (ed >= 18){
+    	do{
+			menu(); cin>>opcion;
+			switch (opcion){
+				case 1:
+					registro:
+					cout<<"\n Numero de jugadores: ";
+       		    	cin>>num;
+					registroJugadores(x,num);
+					break;
+				case 2:
+					if(num>0){
+						cout<<"\n Ingrese numero de jugador: ";
+				  		cin>> num_jugador;
 						cout<<"\tQue desea jugar \n1. Dados\n2. Moneda"<<endl; cin>>opcionJuego;
 						if(opcionJuego==1){
 							cout<<"Digite el numero al que desea apostar (1 a 6)"<<endl; cin>>numero;
-							dado(numero);
-							dineroJugador(num_jugador-1,opcionJuego);
+							dado(x,numero);
 						}else if(opcionJuego == 2){
 							cout<<"Digite el numero al que desea apostar (1. cara   2. sello)"<<endl; cin>>numero;
-							moneda(numero);
-							dineroJugador(num_jugador-1,opcionJuego);
+							moneda(x,numero);
+						}
+						}else{
+							cout<<"Registro vacio!!"<<endl;
+							goto registro;
 						}
 						break;
-					case 3:
-						cout<<"\n Ingrese numero de jugador que desea eliminar: ";
-						cin>> num_jugador;
-						eliminarJugador(num_jugador-1,num);
-					  break;
-					case 4:
+				case 3:
+					if(num>0){
+					cout<<"\n Ingrese numero de jugador que desea eliminar: ";
+					cin>> num_jugador;
+					eliminarJugador(num_jugador-1,num);
+					}else{
+						cout<<"Registro vacio!!"<<endl;
+						goto registro;
+					}
+				 	break;
+				case 4:
+					if(num>0){
 						cout<<"\n Ingrese numero de jugador que desea ver: ";
 						cin>> num_jugador;
-						datosJugador(num_jugador-1,num);
-					case 5:
+						datosJugador(num_jugador-1,num);	
+					}else{
+						cout<<"Registro vacio!!"<<endl;
+						goto registro;	
+					}
+					break;
+				case 5:
+					if(num>0){
 						cout<<"\n Ingrese numero de jugador que desea ver: ";
 						cin>> num_jugador;
+						cout<<"Ganancias: "<<lista[num_jugador-1].ganancias<<endl;
+						cout<<"Perdidas: "<<lista[num_jugador-1].perdidas<<endl;
 						cout<<"Dinero actual del jugador: "<<lista[num_jugador-1].dinero<<endl;
-				}
+					}else{
+						cout<<"Registro vacio!!"<<endl;
+						goto registro;		
+					}
+					break;
+			}
 
-		}else{
+		}while(opcion!=6 && opcion<6);
+	}else{
 			cout<<"No cumple con la edad minima requerida!!"<<endl;
-		}
-	}while(opcion!=6);
+	}
 }
